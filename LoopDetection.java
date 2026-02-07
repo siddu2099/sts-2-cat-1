@@ -1,15 +1,14 @@
 import java.util.*;
 
 class Node {
+    int data;
+    Node next;
 
-        int data;
-        Node next;
-
-        Node(int data) {
-            this.data = data;
-            this.next = null;
-        }
+    Node(int data) {
+        this.data = data;
+        this.next = null;
     }
+}
 
 public class LoopDetection {
 
@@ -33,7 +32,8 @@ public class LoopDetection {
 
     // Create loop: last node -> 2nd node
     public void createTestLoop() {
-        if (head == null || head.next == null) return;
+        if (head == null || head.next == null)
+            return;
 
         Node last = head;
         while (last.next != null)
@@ -43,7 +43,7 @@ public class LoopDetection {
         System.out.println("Loop created successfully.");
     }
 
-    // Floyd’s Cycle Detection
+    // Floyd’s Cycle Detection Algorithm
     public boolean hasLoopFloyd() {
         Node slow = head, fast = head;
 
@@ -53,20 +53,6 @@ public class LoopDetection {
 
             if (slow == fast)
                 return true;
-        }
-        return false;
-    }
-
-    // HashSet based Loop Detection
-    public static boolean hasLoopHashSet(Node head) {
-        HashSet<Node> visited = new HashSet<>();
-        
-        while (head != null) {
-            if (visited.contains(head))
-                return true;
-
-            visited.add(head);
-            head = head.next;
         }
         return false;
     }
@@ -84,8 +70,7 @@ public class LoopDetection {
             list.insert(sc.nextInt());
         }
 
-        System.out.println("Loop present (Floyd) before creation: " + list.hasLoopFloyd());
-        System.out.println("Loop present (HashSet) before creation: " + hasLoopHashSet(list.head));
+        System.out.println("Loop present before creation: " + list.hasLoopFloyd());
 
         System.out.print("Create loop? (1 = Yes, 0 = No): ");
         int choice = sc.nextInt();
@@ -94,8 +79,7 @@ public class LoopDetection {
             list.createTestLoop();
         }
 
-        System.out.println("Loop present (Floyd) after creation: " + list.hasLoopFloyd());
-        System.out.println("Loop present (HashSet) after creation: " + hasLoopHashSet(list.head));
+        System.out.println("Loop present after creation: " + list.hasLoopFloyd());
 
         sc.close();
     }
