@@ -3,6 +3,7 @@ import java.util.Stack;
 
 class Main {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter number of people: ");
@@ -19,23 +20,23 @@ class Main {
 
         Stack<Integer> st = new Stack<>();
 
-        // Step 1: push all people
+        // Step 1: Push all people
         for (int i = 0; i < n; i++) {
             st.push(i);
         }
 
-        // Step 2: eliminate non-celebrities
+        // Step 2: Eliminate non-celebrities
         while (st.size() > 1) {
             int x = st.pop();
             int y = st.pop();
 
             if (a[x][y] == 1)
-                st.push(y);
+                st.push(y);   // x knows y → x not celebrity
             else
-                st.push(x);
+                st.push(x);   // x doesn’t know y → y not celebrity
         }
 
-        // Step 3: verify candidate
+        // Step 3: Verify candidate
         int c = st.pop();
         boolean isCelebrity = true;
 
@@ -46,9 +47,9 @@ class Main {
             }
         }
 
-        // Step 4: output
+        // Step 4: Print celebrity
         if (isCelebrity)
-            System.out.println("Celebrity is: " + c);
+            System.out.println("Celebrity is person index: " + c);
         else
             System.out.println("No celebrity found");
 
